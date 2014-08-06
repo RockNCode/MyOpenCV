@@ -7,32 +7,32 @@ using namespace std;
 
 int bw_threshold = 230;
 
-Mat& turnToBW(Mat& bw){
+Mat& turnToBW(Mat& bw)
+{
 
-    for( int y = 0; y < bw.rows; y++ )
+    int nRows = bw.rows;
+    int nCols = bw.cols;
+
+    for( int y = 0; y < nRows; y++ )
     { 
-        for( int x = 0; x < bw.cols; x++ )
+        for( int x = 0; x < nCols; x++ )
         { 
-            for( int c = 0; c < 3; c++ )
-            { 
+            //Need to check how to properly scan RGB image file
+            //for( int c = 0; c < 3; c++ )
+            //{ 
                 if ( bw.at<uchar>(y,x) > bw_threshold ){
                     bw.at<uchar>(y,x) = 255;
                 }else{
                     bw.at<uchar>(y,x) = 0;
                 }
-            }
+                //}
         }
     }
     return bw;
 }
 
-Mat& fillAuxMatrix(Mat& aux){
-    
-}
-
 int etiquetarImagen(Mat& bw)
 {
-    //Bitmap pic = (Bitmap)pb_copia.Image;
     int width = bw.rows;
     int height = bw.cols;
     int etiquetas[width][height];
@@ -53,6 +53,18 @@ int etiquetarImagen(Mat& bw)
             }
         }
     }
+
+    ////////// Print aux matrix //////////////////
+    /*printf("aux matrix\n");
+    for (int x = 0 ; x < width ; x++)
+    {
+        for ( int y = 0 ; y < height ; y++ )
+        {
+            printf(" %d",aux[x][y]);
+        }
+        printf("\n");
+        }*/
+    //////////////////////////////////////////////
             
     for (int i = 0; i<width; i++)
     {
